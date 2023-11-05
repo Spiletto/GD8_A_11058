@@ -9,7 +9,7 @@
         <ol class="breadcrumb float-sm-right"> 
         <li class="breadcrumb-item"> 
             <a href="#">Movie</a>
-            </li>
+        </li>
         <li class="breadcrumb-item active">Create</li>
         </ol>
         </div>
@@ -29,7 +29,19 @@
                     <div class="card-body"> 
                         <form action="{{ route('movie.store') }}" method="POST"
                         enctype="multipart/form-data"> 
-                            @csrf 
+                            @csrf
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="font-weight-bold">Image</label>
+                                    <input type="file" class="form-control-file @error('image') is-invalid @enderror" 
+                                    name="image" accept="image/*">
+                                    @error('image')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="form-row">
                             </div> 
                             <div class="form-row"> 
@@ -67,7 +79,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-md btnprimary">SIMPAN</button>
+                            <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
                         </form>
                     </div>
                     <!-- /.card-body -->

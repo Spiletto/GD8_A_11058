@@ -34,6 +34,7 @@
                             <table class="table table-hover textnowrap">
                                 <thead>
                                     <tr>
+                                        <th class="text-center">Poster</th>
                                         <th class="text-center">Title</th>
                                         <th class="text-center">Director</th>
                                         <th class="textcenter">Duration/min</th>
@@ -43,13 +44,16 @@
                                 <tbody>
                                     @forelse ($movie as $item)
                                     <tr>
+                                        <td class="text-center"> 
+                                            <!-- Kenapa pakai asset ('public/') malah gakeluar gambar ya? -->
+                                            <img src="{{ asset('/' . $item->image) }}" alt="{{ $item->image }}" width="100">
+                                        </td>
                                         <td class="text-center">{{ $item->title }}</td>
                                         <td class="text-center">{{ $item->director }}</td>
-                                        <td class="text-center">{{ $item->duration}}</td>
+                                        <td class="text-center">{{ $item->duration }}</td>
                                         <td class="text-center">
-                                            <form onsubmit="return 
-                                            confirm('Apakah Anda Yakin ?');" action="{{ route('movie.destroy', $item->id)}}" method="POST">
-                                                <a href="{{route('movie.edit', $item->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('movie.destroy', $item->id) }}" method="POST">
+                                                <a href="{{ route('movie.edit', $item->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
